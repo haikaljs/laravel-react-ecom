@@ -21,6 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'city',
+        'zip_code',
+        'country',
+        'phone_number',
+        'profile_image',
+        'profile_completed'
+
     ];
 
     /**
@@ -44,5 +52,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class)->with('products')->latest();
+    }
+
+    public function image_path(){
+        if($this->profile_image){
+            return asset('storages/images/users/'.$this->profile_image);
+        }else{
+            return 'https://cdn.pixabay.com/photo/2021/07/25/08/03/account-6491185_1280.png';
+        }
     }
 }
