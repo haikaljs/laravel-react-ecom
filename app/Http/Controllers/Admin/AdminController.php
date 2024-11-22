@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthAdminRequest;
@@ -32,7 +34,7 @@ class AdminController extends Controller
         if(!auth()->guard('admin')->check()){
             return view('admin.login');
         }
-        return redirect->route('admin.index');
+        return redirect()->route('admin.index');
     }
 
     // Auth the admin
@@ -45,10 +47,10 @@ class AdminController extends Controller
             ])){
 
                 $request->session()->regenerate();
-                return redirect->route('admin.index');
+                return redirect()->route('admin.index');
 
             }else{
-                return redirect->route('admin.login')->with([
+                return redirect()->route('admin.login')->with([
                     'error' => 'These credentials do not match our records'
                 ]);
 
@@ -59,7 +61,7 @@ class AdminController extends Controller
     // Logout the admin
     public function logout(){
         auth()->guard('admin')->logout();
-        return redirect->route('admin.index');
+        return redirect()->route('admin.index');
 
     }
 
