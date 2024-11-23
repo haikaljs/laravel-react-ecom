@@ -17,13 +17,13 @@ class AdminController extends Controller
         $todayOrders = Order::whereDay('created_at', Carbon::today())->get();
         $yesterdayOrders = Order::whereDay('created_at', Carbon::yesterday())->get();
         $monthOrders = Order::whereMonth('created_at', Carbon::now()->month)->get();
-        $yearsOrders = Order::whereYear('created_at', Carbon::now()->year)->get();
+        $yearOrders = Order::whereYear('created_at', Carbon::now()->year)->get();
 
         return view('admin.index')->with([
-            'todaysOrders' => $todayOrders,
+            'todayOrders' => $todayOrders,
             'yesterdayOrders' => $yesterdayOrders,
             'monthOrders' => $monthOrders,
-            'yearsOrders'  => $yearsOrders
+            'yearOrders'  => $yearOrders
 
 
         ]);
